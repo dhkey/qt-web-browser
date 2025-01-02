@@ -3,10 +3,10 @@
 
 #include <QMainWindow>
 #include <QWebEngineView>
-#include <QLineEdit>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
 private slots:
     void navigateToUrl();
@@ -23,11 +24,8 @@ private slots:
     void reloadPage();
 
 private:
+    Ui::MainWindow *ui;
     QWebEngineView *webView;
-    QLineEdit *urlInput;
-    QPushButton *backButton;
-    QPushButton *forwardButton;
-    QPushButton *reloadButton;
 };
 
-#endif // MAINWINDOW_H
+#endif
