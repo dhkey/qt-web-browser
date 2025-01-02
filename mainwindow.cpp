@@ -8,20 +8,18 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    webView = new QWebEngineView(this);
-
-    QVBoxLayout *layout = new QVBoxLayout(ui->webWidget);
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->addWidget(webView);
-
+    this->resize(1500, 900);
+    tabManager = new TabManager(ui->tabs, this);
+    connect(tabManager, &TabManager::urlChanged, this, &MainWindow::updateUrl);
+    connect(ui->newTabButton, &QPushButton::clicked, this, [this]() {
+        tabManager->addNewTab();
+    });
+    tabManager->clearTabs();
+    tabManager->addNewTab();
     connect(ui->urlLineEdit, &QLineEdit::returnPressed, this, &MainWindow::navigateToUrl);
-    connect(webView, &QWebEngineView::urlChanged, this, &MainWindow::updateUrl);
     connect(ui->backButton, &QPushButton::clicked, this, &MainWindow::navigateBack);
     connect(ui->forwardButton, &QPushButton::clicked, this, &MainWindow::navigateForward);
     connect(ui->reloadButton, &QPushButton::clicked, this, &MainWindow::reloadPage);
-
-    webView->setUrl(QUrl("https://www.google.com"));
 }
 
 MainWindow::~MainWindow()
@@ -31,11 +29,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::navigateToUrl()
 {
-    QString url = ui->urlLineEdit->text();
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
+    if (auto *webView = tabManager->currentWebView()) {
+        QString url = ui->urlLineEdit->text();
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+        webView->setUrl(QUrl(url));
     }
-    webView->setUrl(QUrl(url));
 }
 
 void MainWindow::updateUrl(const QUrl &url)
@@ -45,15 +45,21 @@ void MainWindow::updateUrl(const QUrl &url)
 
 void MainWindow::navigateBack()
 {
-    webView->back();
+    if (auto *webView = tabManager->currentWebView()) {
+        webView->back();
+    }
 }
 
 void MainWindow::navigateForward()
 {
-    webView->forward();
+    if (auto *webView = tabManager->currentWebView()) {
+        webView->forward();
+    }
 }
 
 void MainWindow::reloadPage()
 {
-    webView->reload();
+    if (auto *webView = tabManager->currentWebView()) {
+        webView->reload();
+    }
 }

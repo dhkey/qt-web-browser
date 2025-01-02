@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "tabmanager.h"
 #include <QMainWindow>
 #include <QWebEngineView>
 
@@ -25,7 +25,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QWebEngineView *webView;
+    TabManager *tabManager;
+
 };
 
 #endif

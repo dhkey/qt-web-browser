@@ -12,10 +12,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tabmanager.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    tabmanager.h
 
 FORMS += \
     mainwindow.ui
