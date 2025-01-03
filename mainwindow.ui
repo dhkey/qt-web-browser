@@ -13,6 +13,18 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: #2b2b2b;
+}
+
+QMainWindow#MainWindow QTabBar::close-button {
+    background-color: rgb(255, 255, 255);
+    subcontrol-position: right;
+    border-radius: 5px;
+    margin: 2px;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="1">
@@ -21,36 +33,202 @@
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QPushButton" name="backButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+          </property>
           <property name="text">
-           <string>&lt;-</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="forwardButton">
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+          </property>
           <property name="text">
-           <string>-&gt;</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::GoNext"/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="reloadButton">
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+          </property>
           <property name="text">
-           <string>Reload</string>
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item row="0" column="2">
-       <widget class="QPushButton" name="SearchButton">
+       <widget class="QPushButton" name="searchButton">
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+        </property>
         <property name="text">
-         <string>Search</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
         </property>
        </widget>
       </item>
       <item row="0" column="3">
        <widget class="QPushButton" name="newTabButton">
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+        </property>
         <property name="text">
          <string>New Tab</string>
         </property>
@@ -64,6 +242,25 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="styleSheet">
+         <string notr="true">    QLineEdit {
+        background-color: rgb(60, 61, 61);;    
+        border: 2px solid;  
+        border-radius: 4px;     
+        padding: 5px;               
+        font-size: 14px;            
+	   color: #ffffff;            
+
+    }
+    QLineEdit:focus {
+        border: 2px solid #0078d7;    
+        outline: none;                
+    }
+    QLineEdit:disabled {
+        background-color: #f5f5f5; 
+        color: #999
+    }</string>
+        </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="4">
@@ -71,7 +268,7 @@
         <property name="styleSheet">
          <string notr="true">QTabWidget::pane {
     border: 1px solid #38383d;
-    background-color: #2b2b2d;
+    background-color: #2b2b2d !important;
     border-radius: 4px;
 }
 
@@ -107,7 +304,7 @@ QTabBar::tab:!selected {
 
 QTabBar::close-button {
     background-color: rgb(255, 255, 255);
-    subcontrol-position: right;
+    subcontrol-position: right center;
     border-radius: 5px;
     margin: 2px;
 }
@@ -125,7 +322,7 @@ QTabBar::close-button:hover {
          <enum>QTabWidget::TabShape::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="elideMode">
          <enum>Qt::TextElideMode::ElideRight</enum>

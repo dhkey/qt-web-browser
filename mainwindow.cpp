@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Qt Web Browser");
     this->resize(1500, 900);
     tabManager = new TabManager(ui->tabs, this);
     connect(tabManager, &TabManager::urlChanged, this, &MainWindow::updateUrl);
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->backButton, &QPushButton::clicked, this, &MainWindow::navigateBack);
     connect(ui->forwardButton, &QPushButton::clicked, this, &MainWindow::navigateForward);
     connect(ui->reloadButton, &QPushButton::clicked, this, &MainWindow::reloadPage);
+    connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::navigateToUrl);
 }
 
 MainWindow::~MainWindow()

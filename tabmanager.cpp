@@ -40,6 +40,5 @@ void TabManager::closeTab(int index)
 
 void TabManager::clearTabs()
 {
-    QWidget *tab = tabs;
     tabs->clear();
 }
