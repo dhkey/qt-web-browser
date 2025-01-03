@@ -18,6 +18,7 @@ public:
     bool addRecord(const QString& url);
     QList<QPair<QString, QString>> getAllRecords();
     QList<QPair<QString, QString>> getRecordsByDateRange(const QDateTime& startDate, const QDateTime& endDate);
+    QList<QString> getUniqueMonths();
 
 private:
     HistoryManager(const QString& dbPath = "history.db");

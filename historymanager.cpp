@@ -85,3 +85,23 @@ QList<QPair<QString, QString>> HistoryManager::getRecordsByDateRange(const QDate
 
     return records;
 }
+
+QList<QString> HistoryManager::getUniqueMonths() {
+    QList<QString> months;
+    if (!db.isOpen()) {
+        return months;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT DISTINCT strftime('%Y-%m', visit_date) AS month FROM history ORDER BY month DESC");
+
+    if (!query.exec()) {
+        return months;
+    }
+
+    while (query.next()) {
+        QString month = query.value(0).toString();
+        months.append(month);
+    }
+    return months;
+}

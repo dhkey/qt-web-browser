@@ -10,14 +10,56 @@ historyview::historyview(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QList<QPair<QString, QString>> todaysRecords =
-        HistoryManager::getInstance().getRecordsByDateRange(
+    historyview::populateTreeWidget();
+
+    connect(ui->tree, &QTreeWidget::itemClicked, this, &historyview::onTreeItemSelected);
+}
+
+void historyview::populateTreeWidget() {
+    ui->tree->clear();
+    QTreeWidgetItem* todayItem = new QTreeWidgetItem(ui->tree);
+    todayItem->setText(0, "Today");
+    QTreeWidgetItem* yesterdayItem = new QTreeWidgetItem(ui->tree);
+    yesterdayItem->setText(0, "Yesterday");
+    QList<QString> months = HistoryManager::getInstance().getUniqueMonths();
+    for (const QString& month : months) {
+        QDate date = QDate::fromString(month, "yyyy-MM");
+        if (date.isValid()) {
+            QString monthName = date.toString("MMMM yyyy");
+            QTreeWidgetItem* monthItem = new QTreeWidgetItem(ui->tree);
+            monthItem->setText(0, monthName);
+        }
+    }
+    ui->tree->expandAll();
+}
+
+
+void historyview::onTreeItemSelected(QTreeWidgetItem* item, int column) {
+    QString selectedText = item->text(0);
+    QList<QPair<QString, QString>> records;
+
+    if (selectedText == "Today") {
+        records = HistoryManager::getInstance().getRecordsByDateRange(
             QDateTime(QDate::currentDate(), QTime(0, 0, 0)),
             QDateTime(QDate::currentDate(), QTime(23, 59, 59))
             );
+    } else if (selectedText == "Yesterday") {
+        QDate yesterday = QDate::currentDate().addDays(-1);
+        records = HistoryManager::getInstance().getRecordsByDateRange(
+            QDateTime(yesterday, QTime(0, 0, 0)),
+            QDateTime(yesterday, QTime(23, 59, 59))
+            );
+    } else {
+        QDate date = QDate::fromString(selectedText, "MMMM yyyy");
+        if (date.isValid()) {
+            QDateTime startOfMonth(date, QTime(0, 0, 0));
+            QDateTime endOfMonth(date.addDays(date.daysInMonth() - 1), QTime(23, 59, 59));
 
-    renderItemsOnTableWidget(todaysRecords);
+            records = HistoryManager::getInstance().getRecordsByDateRange(startOfMonth, endOfMonth);
+        }
+    }
 
+    renderItemsOnTableWidget(records);
 }
 
 void historyview::renderItemsOnTableWidget(const QList<QPair<QString, QString>>& records)
@@ -31,7 +73,6 @@ void historyview::renderItemsOnTableWidget(const QList<QPair<QString, QString>>&
     }
     ui->table->resizeColumnsToContents();
 }
-
 
 historyview::~historyview()
 {
