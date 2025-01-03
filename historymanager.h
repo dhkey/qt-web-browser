@@ -16,6 +16,8 @@ public:
     HistoryManager& operator=(const HistoryManager&) = delete;
 
     bool addRecord(const QString& url);
+    QList<QPair<QString, QString>> getAllRecords();
+    QList<QPair<QString, QString>> getRecordsByDateRange(const QDateTime& startDate, const QDateTime& endDate);
 
 private:
     HistoryManager(const QString& dbPath = "history.db");

@@ -40,3 +40,48 @@ bool HistoryManager::addRecord(const QString& url) {
     query.bindValue(":url", url);
     return query.exec();
 }
+
+QList<QPair<QString, QString>> HistoryManager::getAllRecords() {
+    QList<QPair<QString, QString>> records;
+    if (!db.isOpen()) {
+        return records;
+    }
+
+    QSqlQuery query("SELECT url, visit_date FROM history ORDER BY visit_date DESC");
+    while (query.next()) {
+        QString url = query.value(0).toString();
+        QString date = query.value(1).toString();
+        records.append(qMakePair(url, date));
+    }
+    return records;
+}
+
+QList<QPair<QString, QString>> HistoryManager::getRecordsByDateRange(const QDateTime& startDate, const QDateTime& endDate) {
+    QList<QPair<QString, QString>> records;
+
+    if (!db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return records;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT url, visit_date FROM history WHERE strftime('%Y-%m-%d %H:%M:%S', visit_date) BETWEEN :start AND :end ORDER BY visit_date DESC");
+
+    QString startDateStr = startDate.toString("yyyy-MM-dd HH:mm:ss");
+    QString endDateStr = endDate.toString("yyyy-MM-dd HH:mm:ss");
+    query.bindValue(":start", startDateStr);
+    query.bindValue(":end", endDateStr);
+
+
+    if (!query.exec()) {
+        return records;
+    }
+
+    while (query.next()) {
+        QString url = query.value(0).toString();
+        QString date = query.value(1).toString();
+        records.append(qMakePair(url, date));
+    }
+
+    return records;
+}

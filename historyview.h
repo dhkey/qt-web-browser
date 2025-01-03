@@ -15,6 +15,8 @@ public:
     explicit historyview(QWidget *parent = nullptr);
     ~historyview();
 
+    void renderItemsOnTableWidget(const QList<QPair<QString, QString>>& records);
+
 private:
     Ui::historyview *ui;
 };
