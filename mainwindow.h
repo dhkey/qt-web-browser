@@ -27,7 +27,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     TabManager *tabManager;
-
 };
 
 #endif

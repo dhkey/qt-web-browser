@@ -127,13 +127,13 @@ QTabBar::close-button:hover {
          <enum>QTabWidget::TabShape::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="elideMode">
          <enum>Qt::TextElideMode::ElideLeft</enum>
         </property>
         <property name="usesScrollButtons">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="documentMode">
          <bool>false</bool>

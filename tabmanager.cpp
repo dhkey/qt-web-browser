@@ -1,4 +1,5 @@
 #include "tabmanager.h"
+#include "historymanager.h"
 
 TabManager::TabManager(QTabWidget *tabs, QObject *parent)
     : QObject(parent), tabs(tabs)
@@ -6,7 +7,6 @@ TabManager::TabManager(QTabWidget *tabs, QObject *parent)
     connect(tabs, &QTabWidget::tabCloseRequested, this, &TabManager::closeTab);
     QShortcut *closeTabShortcut = new QShortcut(QKeySequence("Ctrl+W"), tabs);
     connect(closeTabShortcut, &QShortcut::activated, this, &TabManager::closeCurrentTab);
-
 }
 
 void TabManager::addNewTab(const QUrl &url)
@@ -21,12 +21,11 @@ void TabManager::addNewTab(const QUrl &url)
             tabs->setTabText(index, url.host());
         }
         emit urlChanged(url.toString());
+        HistoryManager::getInstance().addRecord(url.toString());
     });
     connect(webView, &QWebEngineView::titleChanged, this, &TabManager::tabTitleChanged);
     connect(webView, &QWebEngineView::loadProgress, this, [this, webView](int progress) {
-        if (webView == currentWebView()) {
-            emit loadProgress(progress);
-        }
+        if (webView == currentWebView()) { emit loadProgress(progress); }
     });
 }
 
