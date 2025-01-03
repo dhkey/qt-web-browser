@@ -13,6 +13,10 @@ historyview::historyview(QWidget *parent)
     historyview::populateTreeWidget();
 
     connect(ui->tree, &QTreeWidget::itemClicked, this, &historyview::onTreeItemSelected);
+    QList<QPair<QString, QString>> records = HistoryManager::getInstance().getRecordsByDateRange(
+        QDateTime(QDate::currentDate(), QTime(0, 0, 0)),
+        QDateTime(QDate::currentDate(), QTime(23, 59, 59)));
+    historyview::renderItemsOnTableWidget(records);
 }
 
 void historyview::populateTreeWidget() {
@@ -78,4 +82,3 @@ historyview::~historyview()
 {
     delete ui;
 }
-

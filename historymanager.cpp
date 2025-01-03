@@ -26,7 +26,7 @@ bool HistoryManager::init() {
     bool success = query.exec("CREATE TABLE IF NOT EXISTS history ("
                               "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                               "url TEXT NOT NULL,"
-                              "visit_date DATETIME DEFAULT CURRENT_TIMESTAMP"
+                              "visit_date DATETIME DEFAULT (datetime('now', 'localtime'))"
                               ")");
     return success;
 }
@@ -66,7 +66,6 @@ QList<QPair<QString, QString>> HistoryManager::getRecordsByDateRange(const QDate
 
     QSqlQuery query;
     query.prepare("SELECT url, visit_date FROM history WHERE strftime('%Y-%m-%d %H:%M:%S', visit_date) BETWEEN :start AND :end ORDER BY visit_date DESC");
-
     QString startDateStr = startDate.toString("yyyy-MM-dd HH:mm:ss");
     QString endDateStr = endDate.toString("yyyy-MM-dd HH:mm:ss");
     query.bindValue(":start", startDateStr);
