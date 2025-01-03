@@ -1,12 +1,18 @@
 #include "tabmanager.h"
 #include "historymanager.h"
-
+#include "historyview.h"
 TabManager::TabManager(QTabWidget *tabs, QObject *parent)
     : QObject(parent), tabs(tabs)
 {
     connect(tabs, &QTabWidget::tabCloseRequested, this, &TabManager::closeTab);
     QShortcut *closeTabShortcut = new QShortcut(QKeySequence("Ctrl+W"), tabs);
     connect(closeTabShortcut, &QShortcut::activated, this, &TabManager::closeCurrentTab);
+}
+
+void TabManager::addHistoryTab(){
+    auto *historyView = new historyview();
+    int index = tabs->addTab(historyView, "History");
+    tabs->setCurrentIndex(index);
 }
 
 void TabManager::addNewTab(const QUrl &url)

@@ -12,6 +12,7 @@ class TabManager : public QObject {
 public:
     explicit TabManager(QTabWidget *tabs, QObject *parent = nullptr);
 
+    void addHistoryTab();
     void addNewTab(const QUrl &url = QUrl("https://www.google.com"));
     QWebEngineView* currentWebView() const;
 

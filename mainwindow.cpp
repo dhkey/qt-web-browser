@@ -18,12 +18,19 @@ MainWindow::MainWindow(QWidget *parent)
     });
     tabManager->clearTabs();
     tabManager->addNewTab();
+
     connect(ui->urlLineEdit, &QLineEdit::returnPressed, this, &MainWindow::navigateToUrl);
     connect(ui->backButton, &QPushButton::clicked, this, &MainWindow::navigateBack);
     connect(ui->forwardButton, &QPushButton::clicked, this, &MainWindow::navigateForward);
     connect(ui->reloadButton, &QPushButton::clicked, this, &MainWindow::reloadPage);
     connect(ui->searchButton, &QPushButton::clicked, this, &MainWindow::navigateToUrl);
+
     connect(tabManager, &TabManager::loadProgress, this, &MainWindow::updateProgress);
+
+    connect(ui->historyButton, &QPushButton::clicked, this, [this]() {
+        tabManager->addHistoryTab();
+    });
+
 }
 
 MainWindow::~MainWindow()
