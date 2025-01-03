@@ -127,10 +127,10 @@ QTabBar::close-button:hover {
          <enum>QTabWidget::TabShape::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="elideMode">
-         <enum>Qt::TextElideMode::ElideRight</enum>
+         <enum>Qt::TextElideMode::ElideLeft</enum>
         </property>
         <property name="usesScrollButtons">
          <bool>false</bool>
@@ -195,6 +195,9 @@ QPushButton:focus, QToolButton:focus {
         </property>
         <property name="icon">
          <iconset theme="QIcon::ThemeIcon::ListAdd"/>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+T</string>
         </property>
        </widget>
       </item>
@@ -324,6 +327,9 @@ QPushButton:focus, QToolButton:focus {
           <property name="icon">
            <iconset theme="QIcon::ThemeIcon::ViewRefresh"/>
           </property>
+          <property name="shortcut">
+           <string notr="true">Ctrl+R</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -362,6 +368,12 @@ QPushButton:focus, QToolButton:focus {
         background-color: #f5f5f5; 
         color: #999
     }</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
           </property>
          </widget>
         </item>

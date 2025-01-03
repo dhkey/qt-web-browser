@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTabWidget>
 #include <QWebEngineView>
+#include <QShortcut>
 
 class TabManager : public QObject {
     Q_OBJECT
@@ -22,6 +23,7 @@ signals:
 public slots:
     void closeTab(int index);
     void clearTabs();
+    void closeCurrentTab();
     void handleLoadProgress(int progress);
 
 private:

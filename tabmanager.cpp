@@ -4,6 +4,9 @@ TabManager::TabManager(QTabWidget *tabs, QObject *parent)
     : QObject(parent), tabs(tabs)
 {
     connect(tabs, &QTabWidget::tabCloseRequested, this, &TabManager::closeTab);
+    QShortcut *closeTabShortcut = new QShortcut(QKeySequence("Ctrl+W"), tabs);
+    connect(closeTabShortcut, &QShortcut::activated, this, &TabManager::closeCurrentTab);
+
 }
 
 void TabManager::addNewTab(const QUrl &url)
@@ -41,6 +44,12 @@ void TabManager::closeTab(int index)
         addNewTab();
     }
 }
+
+void TabManager::closeCurrentTab(){
+    int currentIndex = tabs->currentIndex();
+    closeTab(currentIndex);
+}
+
 
 void TabManager::clearTabs()
 {
