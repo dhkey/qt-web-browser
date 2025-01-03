@@ -17,10 +17,12 @@ public:
 signals:
     void urlChanged(const QString &url);
     void tabTitleChanged(const QString &title);
+    void loadProgress(int progress);
 
 public slots:
     void closeTab(int index);
     void clearTabs();
+    void handleLoadProgress(int progress);
 
 private:
     QTabWidget *tabs;

@@ -19,8 +19,12 @@ void TabManager::addNewTab(const QUrl &url)
         }
         emit urlChanged(url.toString());
     });
-
     connect(webView, &QWebEngineView::titleChanged, this, &TabManager::tabTitleChanged);
+    connect(webView, &QWebEngineView::loadProgress, this, [this, webView](int progress) {
+        if (webView == currentWebView()) {
+            emit loadProgress(progress);
+        }
+    });
 }
 
 QWebEngineView* TabManager::currentWebView() const
@@ -41,4 +45,8 @@ void TabManager::closeTab(int index)
 void TabManager::clearTabs()
 {
     tabs->clear();
+}
+
+void TabManager::handleLoadProgress(int progress){
+    emit loadProgress(progress);
 }

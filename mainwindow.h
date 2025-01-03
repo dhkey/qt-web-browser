@@ -22,6 +22,7 @@ private slots:
     void navigateBack();
     void navigateForward();
     void reloadPage();
+    void updateProgress(int progress);
 
 private:
     Ui::MainWindow *ui;
