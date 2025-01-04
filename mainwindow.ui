@@ -27,8 +27,47 @@ QMainWindow#MainWindow QTabBar::close-button {
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_5">
-    <item row="1" column="1">
+    <item row="0" column="1">
      <layout class="QGridLayout" name="gridLayout_4">
+      <item row="1" column="3">
+       <widget class="QPushButton" name="searchButton">
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="5">
        <widget class="QPushButton" name="newTabButton">
         <property name="enabled">
@@ -72,6 +111,191 @@ QPushButton:focus, QToolButton:focus {
         <property name="shortcut">
          <string>Ctrl+T</string>
         </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLineEdit" name="urlLineEdit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>100</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">    QLineEdit {
+        background-color: rgb(60, 61, 61);;    
+        border: 2px solid;  
+        border-radius: 4px;     
+        padding: 5px;               
+        font-size: 14px;            
+	   color: #ffffff;            
+
+    }
+    QLineEdit:focus {
+        border: 2px solid #0078d7;    
+        outline: none;                
+    }
+    QLineEdit:disabled {
+        background-color: #f5f5f5; 
+        color: #999
+    }</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QProgressBar" name="progressBar">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="4">
+       <widget class="QPushButton" name="historyButton">
+        <property name="styleSheet">
+         <string notr="true">
+QPushButton, QToolButton {
+    background-color: rgb(60, 61, 61);
+    border: none;
+    color: white;
+    qproperty-iconSize: 20px 20px;
+    padding: 5px;
+    margin: 2;
+    border-radius: 4px;
+}
+
+QPushButton:hover, QToolButton:hover {
+    background-color: #4a4a4f;
+}
+
+QPushButton:disabled, QToolButton:disabled {
+    opacity: 0.5;
+}
+
+QPushButton:pressed, QToolButton:pressed {
+    background-color: #2b2b2d;
+}
+
+QPushButton:focus, QToolButton:focus {
+    outline: none;
+    border: 1px solid #535356;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::AddressBookNew"/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="6">
+       <widget class="QTabWidget" name="tabs">
+        <property name="styleSheet">
+         <string notr="true">QTabWidget::pane {
+    border: 1px solid #38383d;
+    background-color: #2b2b2d !important;
+    border-radius: 4px;
+}
+
+QTabWidget::tab-bar {
+    left: 5px;
+    alignment: left;
+}
+
+QTabBar::tab {
+    background-color: #2b2b2d;
+    color: #f9f9fa;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 100px;
+    padding: 8px 15px;
+    margin-right: 2px;
+    border: 1px solid transparent;
+}
+
+QTabBar::tab:hover {
+    background-color: #38383d;
+}
+
+QTabBar::tab:selected {
+    background-color: #38383d;
+    border: 1px solid #535356;
+    border-bottom: none;
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px;
+}
+
+QTabBar::close-button {
+    background-color: rgb(255, 255, 255);
+    subcontrol-position: right center;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+QTabBar::close-button:hover {
+    background-color: rgb(255, 0, 8);
+    border-radius: 5px;
+}
+</string>
+        </property>
+        <property name="tabPosition">
+         <enum>QTabWidget::TabPosition::North</enum>
+        </property>
+        <property name="tabShape">
+         <enum>QTabWidget::TabShape::Rounded</enum>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <property name="elideMode">
+         <enum>Qt::TextElideMode::ElideLeft</enum>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>true</bool>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
+        </property>
+        <property name="tabsClosable">
+         <bool>true</bool>
+        </property>
+        <property name="movable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="tab1">
+         <attribute name="title">
+          <string>Tab 1</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="tab2">
+         <attribute name="title">
+          <string>Tab 2</string>
+         </attribute>
+        </widget>
        </widget>
       </item>
       <item row="1" column="0">
@@ -207,230 +431,6 @@ QPushButton:focus, QToolButton:focus {
         </item>
        </layout>
       </item>
-      <item row="1" column="3">
-       <widget class="QPushButton" name="searchButton">
-        <property name="styleSheet">
-         <string notr="true">
-QPushButton, QToolButton {
-    background-color: rgb(60, 61, 61);
-    border: none;
-    color: white;
-    qproperty-iconSize: 20px 20px;
-    padding: 5px;
-    margin: 2;
-    border-radius: 4px;
-}
-
-QPushButton:hover, QToolButton:hover {
-    background-color: #4a4a4f;
-}
-
-QPushButton:disabled, QToolButton:disabled {
-    opacity: 0.5;
-}
-
-QPushButton:pressed, QToolButton:pressed {
-    background-color: #2b2b2d;
-}
-
-QPushButton:focus, QToolButton:focus {
-    outline: none;
-    border: 1px solid #535356;
-}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::SystemSearch"/>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="6">
-       <widget class="QTabWidget" name="tabs">
-        <property name="styleSheet">
-         <string notr="true">QTabWidget::pane {
-    border: 1px solid #38383d;
-    background-color: #2b2b2d !important;
-    border-radius: 4px;
-}
-
-QTabWidget::tab-bar {
-    left: 5px;
-    alignment: left;
-}
-
-QTabBar::tab {
-    background-color: #2b2b2d;
-    color: #f9f9fa;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    min-width: 100px;
-    padding: 8px 15px;
-    margin-right: 2px;
-    border: 1px solid transparent;
-}
-
-QTabBar::tab:hover {
-    background-color: #38383d;
-}
-
-QTabBar::tab:selected {
-    background-color: #38383d;
-    border: 1px solid #535356;
-    border-bottom: none;
-}
-
-QTabBar::tab:!selected {
-    margin-top: 2px;
-}
-
-QTabBar::close-button {
-    background-color: rgb(255, 255, 255);
-    subcontrol-position: right center;
-    border-radius: 5px;
-    margin: 2px;
-}
-
-QTabBar::close-button:hover {
-    background-color: rgb(255, 0, 8);
-    border-radius: 5px;
-}
-</string>
-        </property>
-        <property name="tabPosition">
-         <enum>QTabWidget::TabPosition::North</enum>
-        </property>
-        <property name="tabShape">
-         <enum>QTabWidget::TabShape::Rounded</enum>
-        </property>
-        <property name="currentIndex">
-         <number>1</number>
-        </property>
-        <property name="elideMode">
-         <enum>Qt::TextElideMode::ElideLeft</enum>
-        </property>
-        <property name="usesScrollButtons">
-         <bool>true</bool>
-        </property>
-        <property name="documentMode">
-         <bool>false</bool>
-        </property>
-        <property name="tabsClosable">
-         <bool>true</bool>
-        </property>
-        <property name="movable">
-         <bool>true</bool>
-        </property>
-        <widget class="QWidget" name="tab1">
-         <attribute name="title">
-          <string>Tab 1</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="tab2">
-         <attribute name="title">
-          <string>Tab 2</string>
-         </attribute>
-        </widget>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QLineEdit" name="urlLineEdit">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>100</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">    QLineEdit {
-        background-color: rgb(60, 61, 61);;    
-        border: 2px solid;  
-        border-radius: 4px;     
-        padding: 5px;               
-        font-size: 14px;            
-	   color: #ffffff;            
-
-    }
-    QLineEdit:focus {
-        border: 2px solid #0078d7;    
-        outline: none;                
-    }
-    QLineEdit:disabled {
-        background-color: #f5f5f5; 
-        color: #999
-    }</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-          </property>
-          <property name="clearButtonEnabled">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QProgressBar" name="progressBar">
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="value">
-           <number>24</number>
-          </property>
-          <property name="invertedAppearance">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="1" column="4">
-       <widget class="QPushButton" name="historyButton">
-        <property name="styleSheet">
-         <string notr="true">
-QPushButton, QToolButton {
-    background-color: rgb(60, 61, 61);
-    border: none;
-    color: white;
-    qproperty-iconSize: 20px 20px;
-    padding: 5px;
-    margin: 2;
-    border-radius: 4px;
-}
-
-QPushButton:hover, QToolButton:hover {
-    background-color: #4a4a4f;
-}
-
-QPushButton:disabled, QToolButton:disabled {
-    opacity: 0.5;
-}
-
-QPushButton:pressed, QToolButton:pressed {
-    background-color: #2b2b2d;
-}
-
-QPushButton:focus, QToolButton:focus {
-    outline: none;
-    border: 1px solid #535356;
-}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::AddressBookNew"/>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
    </layout>
@@ -444,7 +444,26 @@ QPushButton:focus, QToolButton:focus {
      <height>43</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuHistory">
+    <property name="title">
+     <string>History</string>
+    </property>
+    <addaction name="actionShow_History"/>
+    <addaction name="separator"/>
+    <addaction name="actionTurn_on_INCOGNITO_mode"/>
+   </widget>
+   <addaction name="menuHistory"/>
   </widget>
+  <action name="actionShow_History">
+   <property name="text">
+    <string>Show History</string>
+   </property>
+  </action>
+  <action name="actionTurn_on_INCOGNITO_mode">
+   <property name="text">
+    <string>Turn on INCOGNITO mode</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

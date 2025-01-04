@@ -3,6 +3,7 @@
 #include <QUrl>
 #include <QVBoxLayout>
 #include <QFileInfo>
+#include "historymanager.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,21 @@ MainWindow::MainWindow(QWidget *parent)
     });
     tabManager->clearTabs();
     tabManager->addNewTab();
+
+    connect(ui->actionTurn_on_INCOGNITO_mode, &QAction::triggered, this, [this]() {
+        bool incognitoModeStatus = HistoryManager::getInstance().isIncognitoMode();
+        if (!incognitoModeStatus){
+            HistoryManager::getInstance().setIncognitoMode(true);
+            this->ui->actionTurn_on_INCOGNITO_mode->setText("Turn off INCOGNITO mode");
+        }else{
+            HistoryManager::getInstance().setIncognitoMode(false);
+            this->ui->actionTurn_on_INCOGNITO_mode->setText("Turn on INCOGNITO mode");
+        }
+    });
+
+    connect(ui->actionShow_History, &QAction::triggered, this, [this]() {
+        tabManager->addHistoryTab();
+    });
 
     connect(ui->urlLineEdit, &QLineEdit::returnPressed, this, &MainWindow::navigateToUrl);
     connect(ui->backButton, &QPushButton::clicked, this, &MainWindow::navigateBack);

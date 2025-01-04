@@ -16,6 +16,9 @@ public:
     HistoryManager& operator=(const HistoryManager&) = delete;
 
     bool addRecord(const QString& url);
+    void setIncognitoMode(bool enabled);
+    bool isIncognitoMode() const { return incognitoMode; }
+
     QList<QPair<QString, QString>> getAllRecords();
     QList<QPair<QString, QString>> getRecordsByDateRange(const QDateTime& startDate, const QDateTime& endDate);
     QList<QString> getUniqueMonths();
@@ -23,6 +26,8 @@ public:
 private:
     HistoryManager(const QString& dbPath = "history.db");
     ~HistoryManager();
+
+    bool incognitoMode;
 
     bool init();
 

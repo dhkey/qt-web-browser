@@ -7,6 +7,7 @@
 
 HistoryManager::HistoryManager(const QString& path) : dbPath(path) {
     init();
+    incognitoMode = false;
 }
 
 HistoryManager::~HistoryManager() {
@@ -31,8 +32,20 @@ bool HistoryManager::init() {
     return success;
 }
 
+void HistoryManager::setIncognitoMode(bool enabled)
+{
+    if (incognitoMode == enabled) {
+        return;
+    }
+
+    incognitoMode = enabled;
+
+    qDebug() << "Incognito mode:" << (enabled ? "enabled" : "disabled");
+}
+
+
 bool HistoryManager::addRecord(const QString& url) {
-    if (!db.isOpen()) {
+    if (!db.isOpen() || incognitoMode) {
         return false;
     }
     QSqlQuery query;
