@@ -3,6 +3,8 @@
 #include "tabmanager.h"
 #include <QMainWindow>
 #include <QWebEngineView>
+#include <QWebEngineProfile>
+#include <QWebEngineDownloadRequest>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,11 +25,15 @@ private slots:
     void navigateForward();
     void reloadPage();
     void updateProgress(int progress);
+    void downloadFinished();
 
 private:
     Ui::MainWindow *ui;
     TabManager *tabManager;
     void loadStyleSheet(const QString &sheetName);
+    void handleDownloadRequested(QWebEngineDownloadRequest *download);
+    void updateDownloadProgress();
+    QWebEngineDownloadRequest* currentDownload;
 };
 
 #endif

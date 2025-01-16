@@ -4,6 +4,9 @@
 #include <QVBoxLayout>
 #include <QFileInfo>
 #include "historymanager.h"
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QLabel>
 
 void MainWindow::loadStyleSheet(const QString &sheetName) {
     QFile file(sheetName);
@@ -58,7 +61,57 @@ MainWindow::MainWindow(QWidget *parent)
         tabManager->addHistoryTab();
     });
 
+    connect(tabManager->currentWebView()->page()->profile(), &QWebEngineProfile::downloadRequested, this, &MainWindow::handleDownloadRequested);
+    ui->download->setVisible(false);
+    ui->downloadLabel->setVisible(false);
+}
 
+void MainWindow::handleDownloadRequested(QWebEngineDownloadRequest *download) {
+    QString filePath = QFileDialog::getSaveFileName(this, "Save this file?", download->downloadFileName());
+    if (filePath.isEmpty()) {
+        download->cancel();
+        return;
+    }
+    download->setDownloadDirectory(QFileInfo(filePath).absolutePath());
+    download->setDownloadFileName(QFileInfo(filePath).fileName());
+    download->accept();
+    currentDownload = download;
+
+    ui->download->setVisible(true);
+    ui->downloadLabel->setText("Downloading... (" + QFileInfo(filePath).fileName() + ")");
+    ui->downloadLabel->setVisible(true);
+
+    connect(download, &QWebEngineDownloadRequest::receivedBytesChanged,
+            this, &MainWindow::updateDownloadProgress);
+    connect(download, &QWebEngineDownloadRequest::isFinishedChanged,
+            this, &MainWindow::downloadFinished);
+
+    QMessageBox::information(this, "Downloading", "Downloading have beed started!");
+}
+
+void MainWindow::downloadFinished(){
+    ui->download->setVisible(false);
+    ui->downloadLabel->setVisible(false);
+    currentDownload = nullptr;
+}
+
+void MainWindow::updateDownloadProgress() {
+    if (!currentDownload)
+        return;
+
+    qint64 bytesReceived = currentDownload->receivedBytes();
+    qint64 bytesTotal = currentDownload->totalBytes();
+
+    if (bytesTotal > 0) {
+        int percentage = (bytesReceived * 100) / bytesTotal;
+        ui->download->setValue(percentage);
+
+        double receivedMB = bytesReceived / 1048576.0;
+        double totalMB = bytesTotal / 1048576.0;
+        ui->downloadLabel->setText(QString("Downloading: %1 MB of %2 MB")
+                                         .arg(QString::number(receivedMB, 'f', 1))
+                                         .arg(QString::number(totalMB, 'f', 1)));
+    }
 }
 
 MainWindow::~MainWindow()
