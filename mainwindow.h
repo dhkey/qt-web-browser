@@ -27,6 +27,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     TabManager *tabManager;
+    void loadStyleSheet(const QString &sheetName);
 };
 
 #endif

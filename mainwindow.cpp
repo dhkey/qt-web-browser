@@ -5,6 +5,15 @@
 #include <QFileInfo>
 #include "historymanager.h"
 
+void MainWindow::loadStyleSheet(const QString &sheetName) {
+    QFile file(sheetName);
+    if (file.open(QFile::ReadOnly)) {
+        QString style = file.readAll();
+        qApp->setStyleSheet(style);
+        file.close();
+    }
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -25,9 +34,11 @@ MainWindow::MainWindow(QWidget *parent)
         if (!incognitoModeStatus){
             HistoryManager::getInstance().setIncognitoMode(true);
             this->ui->actionTurn_on_INCOGNITO_mode->setText("Turn off INCOGNITO mode");
+            loadStyleSheet(":/styles/incognito.qss");
         }else{
             HistoryManager::getInstance().setIncognitoMode(false);
             this->ui->actionTurn_on_INCOGNITO_mode->setText("Turn on INCOGNITO mode");
+            loadStyleSheet(":/styles/normal.qss");
         }
     });
 
@@ -46,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->historyButton, &QPushButton::clicked, this, [this]() {
         tabManager->addHistoryTab();
     });
+
 
 }
 

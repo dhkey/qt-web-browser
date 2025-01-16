@@ -1,7 +1,6 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-    <qresource prefix="/">
-        <file>icons/back.png</file>
-        <file>icons/forward.png</file>
+<RCC>
+    <qresource prefix="/styles">
+        <file>incognito.qss</file>
+        <file>normal.qss</file>
     </qresource>
 </RCC>

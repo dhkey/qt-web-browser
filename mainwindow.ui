@@ -14,8 +14,12 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow {
+   <string notr="true">QMainWindow[mode=&quot;normal&quot;] {
     background-color: #2b2b2b;
+}
+
+QMainWindow[mode=&quot;incognito&quot;] {
+    background-color: #9400D3;
 }
 
 QMainWindow#MainWindow QTabBar::close-button {
