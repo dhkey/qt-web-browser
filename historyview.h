@@ -13,7 +13,7 @@ class historyview : public QWidget
     Q_OBJECT
 
 public:
-    explicit historyview(QWidget *parent = nullptr);
+    historyview(QWidget *parent = nullptr);
     ~historyview();
 
     void onTreeItemSelected(QTreeWidgetItem* item, int column);
